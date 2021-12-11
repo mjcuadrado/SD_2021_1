@@ -23,6 +23,7 @@ package recipes_service.tsae.sessions;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
@@ -36,7 +37,9 @@ import recipes_service.communication.MessageAErequest;
 import recipes_service.communication.MessageEndTSAE;
 import recipes_service.communication.MessageOperation;
 import recipes_service.communication.MsgType;
+import recipes_service.data.AddOperation;
 import recipes_service.data.Operation;
+import recipes_service.data.OperationType;
 import recipes_service.tsae.data_structures.TimestampMatrix;
 import recipes_service.tsae.data_structures.TimestampVector;
 
@@ -74,18 +77,36 @@ public class TSAESessionPartnerSide extends Thread{
 			LSimLogger.log(Level.TRACE, "[TSAESessionPartnerSide] [session: "+current_session_number+"] TSAE session");
 			LSimLogger.log(Level.TRACE, "[TSAESessionPartnerSide] [session: "+current_session_number+"] received message: "+ msg);
 			if (msg.type() == MsgType.AE_REQUEST){
-				// ...
+				//Nuevo
+				  MessageAErequest aeMsg = (MessageAErequest) msg;
 				
-	            // send operations
-					// ...
+				
+				/*
 					out.writeObject(msg);
 					msg.setSessionNumber(current_session_number);
 					LSimLogger.log(Level.TRACE, "[TSAESessionPartnerSide] [session: "+current_session_number+"] sent message: "+ msg);
-
+*/
 
 				// send to originator: local's summary and ack
 				TimestampVector localSummary = null;
 				TimestampMatrix localAck = null;
+				
+				synchronized (serverData) {
+                    localSummary = serverData.getSummary().clone();
+                    serverData.getAck().update(serverData.getId(), localSummary);
+                    localAck = serverData.getAck().clone();
+                }
+				
+				for (Operation op : serverData.getLog().listNewer(aeMsg.getSummary())) {
+                    out.writeObject(new MessageOperation(op));
+                }
+				
+				//Creamos una array con las operaciones para sincronizar
+				List<MessageOperation> operations = new ArrayList<>();
+				
+				//Fin de nuevo
+			
+				
 				msg = new MessageAErequest(localSummary, localAck);
 				msg.setSessionNumber(current_session_number);
 	 	        out.writeObject(msg);
@@ -95,7 +116,9 @@ public class TSAESessionPartnerSide extends Thread{
 				msg = (Message) in.readObject();
 				LSimLogger.log(Level.TRACE, "[TSAESessionPartnerSide] [session: "+current_session_number+"] received message: "+ msg);
 				while (msg.type() == MsgType.OPERATION){
-					// ...
+					//Nuevo-> Añadimos las operaciones a la array
+					 operations.add((MessageOperation) msg);
+
 					msg = (Message) in.readObject();
 					LSimLogger.log(Level.TRACE, "[TSAESessionPartnerSide] [session: "+current_session_number+"] received message: "+ msg);
 				}
@@ -107,6 +130,20 @@ public class TSAESessionPartnerSide extends Thread{
 					msg.setSessionNumber(current_session_number);
 		            out.writeObject(msg);					
 					LSimLogger.log(Level.TRACE, "[TSAESessionPartnerSide] [session: "+current_session_number+"] sent message: "+ msg);
+					
+					//Nuevo -> Sincronizamos las nuevas operaciones
+					 synchronized (serverData) {
+	                        for (MessageOperation op : operations) {
+	                            if (op.getOperation().getType() == OperationType.ADD) {
+	                            	System.out.println("Enviando operación de añadido al servicio de sincronización");
+	                                serverData.syncOperation((AddOperation) op.getOperation());
+	                            } 
+	                        }
+
+	                        serverData.getSummary().updateMax(aeMsg.getSummary());
+	                        serverData.getAck().updateMax(aeMsg.getAck());
+	                        serverData.getLog().purgeLog(serverData.getAck());
+	                    }
 				}
 				
 			}

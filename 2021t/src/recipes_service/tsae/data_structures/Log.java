@@ -21,10 +21,14 @@
 package recipes_service.tsae.data_structures;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Set;
 import java.util.Vector;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -72,11 +76,11 @@ public class Log implements Serializable{
 	 * @return true if op is inserted, false otherwise.
 	 */
 	public synchronized boolean add(Operation op){
-		
+		/*
 		//Por defecto devolvemos false;
 		boolean result = false;
 		
-		String hostID = this.getHostID(op);
+		String hostID = op.getTimestamp().getHostid();
 		List<Operation> logOperations = this.getOperationsByHost(hostID);
 		Operation lastOperation = this.getLastOperation(logOperations);
 		
@@ -86,7 +90,24 @@ public class Log implements Serializable{
 			//Es nuevo añadimos
 			this.log.get(hostID).add(op);
 		}
-		return result;
+		return result;*/
+		 String hostId = op.getTimestamp().getHostid();
+	        Timestamp lastTimestamp = this.getLastTimestamp(hostId);
+	        long timestampDifference = op.getTimestamp().compare(lastTimestamp);
+
+	        /**
+	         * Check if the inserted Operation is the next to follow.
+	         * If yes, insert it and return true so it can be purged eventually later,
+	         * otherwise return false so that it is kept for later.
+	         */
+	        
+	        if ((lastTimestamp == null && timestampDifference == 0)
+	                || (lastTimestamp != null && timestampDifference == 1)) {
+	            this.log.get(hostId).add(op);
+	            return true;
+	        } else {
+	            return false;
+	        }
 	}
 	
 	/**
@@ -97,10 +118,28 @@ public class Log implements Serializable{
 	 * @param sum
 	 * @return list of operations
 	 */
-	public List<Operation> listNewer(TimestampVector sum){
+	public synchronized List<Operation> listNewer(TimestampVector sum){
 
-		// return generated automatically. Remove it when implementing your solution 
-		return null;
+		 List<Operation> missingOperations = new ArrayList();
+
+		 	//Recorremos los hos
+	        for (String host : this.log.keySet()) {
+	        	
+	        	//Cogemos los datos del host
+	            List<Operation> operations = this.log.get(host);
+	            Timestamp timestampHost = sum.getLast(host);
+
+	            //Recorremos las operaciones que tiene este host
+	            for (Operation op : operations) {
+	                if (op.getTimestamp().compare(timestampHost) > 0) {
+	                	//No tenemos esta operacion
+	                    missingOperations.add(op);
+	                }
+	            }
+	        }
+	        
+	        //Devolvemos las operaciones que no tenemos
+	        return missingOperations;
 	}
 	
 	/**
@@ -167,4 +206,15 @@ public class Log implements Serializable{
 	private Operation getLastOperation(List<Operation> logOperations) {
 		return (logOperations.size() > 0) ? logOperations.get(logOperations.size()-1) : null;
 	}
+	
+	//Obtiene el último Timestamp por Log
+	private Timestamp getLastTimestamp(String hostId) {
+        List<Operation> operations = this.log.get(hostId);
+
+        if (operations == null || operations.isEmpty()) {
+            return null;
+        } else {
+            return operations.get(operations.size() - 1).getTimestamp();
+        }
+    }
 }

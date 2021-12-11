@@ -1,0 +1,8 @@
+11-12-2021 20:00:51:694 TSAE_Server@127.0.1.1:35012 [INFO] : -- *** --> Server -- local node: [127.0.1.1,35012,Server@127.0.1.1:35012]
+11-12-2021 20:00:51:695 TSAE_Server@127.0.1.1:35012 [INFO] : -- *** --> Server -- participants: [Server@127.0.1.1:35000, Server@127.0.1.1:35001, Server@127.0.1.1:35002, Server@127.0.1.1:35003, Server@127.0.1.1:35004, Server@127.0.1.1:35005, Server@127.0.1.1:35006, Server@127.0.1.1:35007, Server@127.0.1.1:35008, Server@127.0.1.1:35009, Server@127.0.1.1:35010, Server@127.0.1.1:35011, Server@127.0.1.1:35012, Server@127.0.1.1:35013, Server@127.0.1.1:35014]
+11-12-2021 20:00:51:699 TSAE_Server@127.0.1.1:35012 [TRACE] : [TSAESessionOriginatorSide] [session: 1] TSAE session
+11-12-2021 20:01:56:431 TSAE_Server@127.0.1.1:35012 [INFO] : [Server@127.0.1.1:35012] ADD recipe: bgcinalg
+11-12-2021 20:01:56:432 TSAE_Server@127.0.1.1:35012 [TRACE] : Updating the TimestampVectorInserting with the timestamp: Server@127.0.1.1:35012:   0
+11-12-2021 20:05:56:422 TSAE_Server@127.0.1.1:35012 [INFO] : [Server@127.0.1.1:35012] ADD recipe: dncturxj
+11-12-2021 20:05:56:423 TSAE_Server@127.0.1.1:35012 [TRACE] : Updating the TimestampVectorInserting with the timestamp: Server@127.0.1.1:35012:   1
+11-12-2021 20:06:16:421 TSAE_Server@127.0.1.1:35012 [INFO] : [Server@127.0.1.1:35012] >> Server DISCONNECTION

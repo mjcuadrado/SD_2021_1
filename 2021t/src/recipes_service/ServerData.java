@@ -252,4 +252,12 @@ public class ServerData {
 	public synchronized void notifyServerConnected(){
 		notifyAll();
 	}
+
+	//Nuevo sincronizador de operaciones (añadir)
+	public void syncOperation(AddOperation operation) {
+	     if (this.log.add(operation)) {
+	            this.recipes.add(operation.getRecipe());
+	        }
+		
+	}
 }

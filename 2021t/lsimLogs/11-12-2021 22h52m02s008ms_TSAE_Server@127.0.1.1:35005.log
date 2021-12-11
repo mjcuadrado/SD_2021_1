@@ -1,0 +1,3 @@
+11-12-2021 22:52:02:034 TSAE_Server@127.0.1.1:35005 [INFO] : -- *** --> Server -- local node: [127.0.1.1,35005,Server@127.0.1.1:35005]
+11-12-2021 22:52:02:035 TSAE_Server@127.0.1.1:35005 [INFO] : -- *** --> Server -- participants: [Server@127.0.1.1:35000, Server@127.0.1.1:35001, Server@127.0.1.1:35002, Server@127.0.1.1:35003, Server@127.0.1.1:35004, Server@127.0.1.1:35005, Server@127.0.1.1:35006, Server@127.0.1.1:35007, Server@127.0.1.1:35008, Server@127.0.1.1:35009, Server@127.0.1.1:35010, Server@127.0.1.1:35011, Server@127.0.1.1:35012, Server@127.0.1.1:35013, Server@127.0.1.1:35014]
+11-12-2021 22:52:02:042 TSAE_Server@127.0.1.1:35005 [TRACE] : [TSAESessionOriginatorSide] [session: 1] TSAE session

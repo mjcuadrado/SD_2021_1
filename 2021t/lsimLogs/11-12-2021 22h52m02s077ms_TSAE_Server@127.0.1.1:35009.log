@@ -1,0 +1,5 @@
+11-12-2021 22:52:02:102 TSAE_Server@127.0.1.1:35009 [INFO] : -- *** --> Server -- local node: [127.0.1.1,35009,Server@127.0.1.1:35009]
+11-12-2021 22:52:02:103 TSAE_Server@127.0.1.1:35009 [INFO] : -- *** --> Server -- participants: [Server@127.0.1.1:35000, Server@127.0.1.1:35001, Server@127.0.1.1:35002, Server@127.0.1.1:35003, Server@127.0.1.1:35004, Server@127.0.1.1:35005, Server@127.0.1.1:35006, Server@127.0.1.1:35007, Server@127.0.1.1:35008, Server@127.0.1.1:35009, Server@127.0.1.1:35010, Server@127.0.1.1:35011, Server@127.0.1.1:35012, Server@127.0.1.1:35013, Server@127.0.1.1:35014]
+11-12-2021 22:52:02:112 TSAE_Server@127.0.1.1:35009 [TRACE] : [TSAESessionOriginatorSide] [session: 1] TSAE session
+11-12-2021 22:52:08:583 TSAE_Server@127.0.1.1:35009 [INFO] : [Server@127.0.1.1:35009] ADD recipe: rvdxdvcg
+11-12-2021 22:52:08:584 TSAE_Server@127.0.1.1:35009 [TRACE] : Updating the TimestampVectorInserting with the timestamp: Server@127.0.1.1:35009:   0
