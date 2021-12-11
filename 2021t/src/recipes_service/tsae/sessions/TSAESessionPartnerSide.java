@@ -78,7 +78,7 @@ public class TSAESessionPartnerSide extends Thread{
 			LSimLogger.log(Level.TRACE, "[TSAESessionPartnerSide] [session: "+current_session_number+"] received message: "+ msg);
 			if (msg.type() == MsgType.AE_REQUEST){
 				//Nuevo
-				  MessageAErequest aeMsg = (MessageAErequest) msg;
+				  MessageAErequest aerequestMsg = (MessageAErequest) msg;
 				
 				
 				/*
@@ -97,7 +97,7 @@ public class TSAESessionPartnerSide extends Thread{
                     localAck = serverData.getAck().clone();
                 }
 				
-				for (Operation op : serverData.getLog().listNewer(aeMsg.getSummary())) {
+				for (Operation op : serverData.getLog().listNewer(aerequestMsg.getSummary())) {
                     out.writeObject(new MessageOperation(op));
                 }
 				
@@ -133,15 +133,15 @@ public class TSAESessionPartnerSide extends Thread{
 					
 					//Nuevo -> Sincronizamos las nuevas operaciones
 					 synchronized (serverData) {
-	                        for (MessageOperation op : operations) {
-	                            if (op.getOperation().getType() == OperationType.ADD) {
-	                            	System.out.println("Enviando operación de añadido al servicio de sincronización");
-	                                serverData.syncOperation((AddOperation) op.getOperation());
+	                        for (MessageOperation operation : operations) {
+	                            if (operation.getOperation().getType() == OperationType.ADD) {
+	                            	//System.out.println("Enviando operación de añadido al servicio de sincronización");
+	                                serverData.syncOperation((AddOperation) operation.getOperation());
 	                            } 
 	                        }
 
-	                        serverData.getSummary().updateMax(aeMsg.getSummary());
-	                        serverData.getAck().updateMax(aeMsg.getAck());
+	                        serverData.getSummary().updateMax(aerequestMsg.getSummary());
+	                        serverData.getAck().updateMax(aerequestMsg.getAck());
 	                        serverData.getLog().purgeLog(serverData.getAck());
 	                    }
 				}

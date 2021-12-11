@@ -134,11 +134,11 @@ public class TSAESessionOriginatorSide extends TimerTask{
             // receive partner's summary and ack
 			if (msg.type() == MsgType.AE_REQUEST){
 				//Nuevo -> Generamos un mensaje AERequest
-				MessageAErequest aeMsg = (MessageAErequest) msg;
-				aeMsg.setSessionNumber(current_session_number);
+				MessageAErequest aerequestMsg = (MessageAErequest) msg;
+				aerequestMsg.setSessionNumber(current_session_number);
 				
 				//Obtenemos las nuevas operaciones y las añadimos
-				 for (Operation op : serverData.getLog().listNewer(aeMsg.getSummary())) {
+				 for (Operation op : serverData.getLog().listNewer(aerequestMsg.getSummary())) {
 	                    out.writeObject(new MessageOperation(op));
 	                }
 				
@@ -162,15 +162,15 @@ public class TSAESessionOriginatorSide extends TimerTask{
 				if (msg.type() == MsgType.END_TSAE){
 					// Nuevo -> Inicio de operación sincronizada
 					synchronized (serverData) {
-                        for (MessageOperation op : operations) {
-                            if (op.getOperation().getType() == OperationType.ADD) {
-                                serverData.syncOperation((AddOperation) op.getOperation());
+                        for (MessageOperation operation : operations) {
+                            if (operation.getOperation().getType() == OperationType.ADD) {
+                                serverData.syncOperation((AddOperation) operation.getOperation());
                             } 
                         }
 //                        System.out.println("Originator - implemented all operations");
 
-                        serverData.getSummary().updateMax(aeMsg.getSummary());
-                        serverData.getAck().updateMax(aeMsg.getAck());
+                        serverData.getSummary().updateMax(aerequestMsg.getSummary());
+                        serverData.getAck().updateMax(aerequestMsg.getAck());
                         serverData.getLog().purgeLog(serverData.getAck());
 //                        System.out.println("Originator - updated Summary and Ack");
                     }

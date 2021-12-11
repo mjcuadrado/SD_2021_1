@@ -76,38 +76,22 @@ public class Log implements Serializable{
 	 * @return true if op is inserted, false otherwise.
 	 */
 	public synchronized boolean add(Operation op){
-		/*
-		//Por defecto devolvemos false;
-		boolean result = false;
-		
-		String hostID = op.getTimestamp().getHostid();
-		List<Operation> logOperations = this.getOperationsByHost(hostID);
-		Operation lastOperation = this.getLastOperation(logOperations);
-		
-		if(op != null && //El parámetro es valido
-				(lastOperation == null || op.getTimestamp().compare(lastOperation.getTimestamp())!=0) //Comparamos que no sea el mismo
-				){
-			//Es nuevo añadimos
-			this.log.get(hostID).add(op);
-		}
-		return result;*/
+	
 		 String hostId = op.getTimestamp().getHostid();
-	        Timestamp lastTimestamp = this.getLastTimestamp(hostId);
-	        long timestampDifference = op.getTimestamp().compare(lastTimestamp);
+		 //Ultimo timestamp por host
+	     Timestamp lastTHost = this.getLastTimestamp(hostId);
+	    //Diferencia con el guardado
+        long difference = op.getTimestamp().compare(lastTHost);
 
-	        /**
-	         * Check if the inserted Operation is the next to follow.
-	         * If yes, insert it and return true so it can be purged eventually later,
-	         * otherwise return false so that it is kept for later.
-	         */
-	        
-	        if ((lastTimestamp == null && timestampDifference == 0)
-	                || (lastTimestamp != null && timestampDifference == 1)) {
-	            this.log.get(hostId).add(op);
-	            return true;
-	        } else {
-	            return false;
-	        }
+        //comprobafinoes
+        if ((lastTHost == null && difference == 0)
+                || (lastTHost != null && difference == 1)) {
+        	//Lo añadimos
+            this.log.get(hostId).add(op);
+            return true;
+        } else {
+            return false;
+        }
 	}
 	
 	/**
