@@ -28,6 +28,7 @@ import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
 import java.util.concurrent.ConcurrentHashMap;
@@ -83,7 +84,7 @@ public class Log implements Serializable{
 	    //Diferencia con el guardado
         long difference = op.getTimestamp().compare(lastTHost);
 
-        //comprobafinoes
+        //comprobacinoes
         if ((lastTHost == null && difference == 0)
                 || (lastTHost != null && difference == 1)) {
         	//Lo añadimos
@@ -133,7 +134,28 @@ public class Log implements Serializable{
 	 * ackSummary. 
 	 * @param ack: ackSummary.
 	 */
-	public void purgeLog(TimestampMatrix ack){
+	public synchronized void purgeLog(TimestampMatrix ack){
+		  TimestampVector minTimestampVector = ack.minTimestampVector();
+		  
+		  for (Map.Entry<String, List<Operation>> logValue : log.entrySet()) {
+	            String host = logValue.getKey();
+	            List<Operation> ops = logValue.getValue();
+	            Timestamp lastTs = minTimestampVector.getLast(host);
+	         
+	            if (lastTs != null) {
+
+		            //Analizamos las operaciones
+		            for (int i = ops.size() - 1; i >= 0; i--) {
+		                Operation op = ops.get(i);
+
+		                if (op.getTimestamp().compare(lastTs) < 0) {
+		                	//Borramos
+		                    ops.remove(i);
+		                }
+		            }
+	            }
+
+	        }
 	}
 
 	/**

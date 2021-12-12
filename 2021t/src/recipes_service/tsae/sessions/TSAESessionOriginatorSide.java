@@ -167,12 +167,10 @@ public class TSAESessionOriginatorSide extends TimerTask{
                                 serverData.syncOperation((AddOperation) operation.getOperation());
                             } 
                         }
-//                        System.out.println("Originator - implemented all operations");
 
                         serverData.getSummary().updateMax(aerequestMsg.getSummary());
                         serverData.getAck().updateMax(aerequestMsg.getAck());
                         serverData.getLog().purgeLog(serverData.getAck());
-//                        System.out.println("Originator - updated Summary and Ack");
                     }
 				}
 

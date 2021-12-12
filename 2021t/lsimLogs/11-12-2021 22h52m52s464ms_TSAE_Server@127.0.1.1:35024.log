@@ -10682,3 +10682,177 @@ Server@127.0.1.1:35018:   3
 11-12-2021 22:56:33:057 TSAE_Server@127.0.1.1:35024 [TRACE] : [TSAESessionPartnerSide] [session: 150] End TSAE session
 11-12-2021 22:56:40:313 TSAE_Server@127.0.1.1:35024 [INFO] : [Server@127.0.1.1:35024] ADD recipe: birwmpqo
 11-12-2021 22:56:40:313 TSAE_Server@127.0.1.1:35024 [TRACE] : Updating the TimestampVectorInserting with the timestamp: Server@127.0.1.1:35024:   3
+11-12-2021 22:56:52:450 TSAE_Server@127.0.1.1:35024 [TRACE] : [TSAESessionPartnerSide] [session: 156] TSAE session
+11-12-2021 22:56:52:450 TSAE_Server@127.0.1.1:35024 [TRACE] : [TSAESessionPartnerSide] [session: 156] received message: MessageAErequest [session: 156, summary=Server@127.0.1.1:35020:   1
+Server@127.0.1.1:35022:   2
+Server@127.0.1.1:35021:   0
+Server@127.0.1.1:35024:   2
+Server@127.0.1.1:35023:   0
+Server@127.0.1.1:35026:   -1000
+Server@127.0.1.1:35015:   0
+Server@127.0.1.1:35025:   1
+Server@127.0.1.1:35028:   2
+Server@127.0.1.1:35017:   1
+Server@127.0.1.1:35027:   1
+Server@127.0.1.1:35016:   2
+Server@127.0.1.1:35019:   2
+Server@127.0.1.1:35029:   1
+Server@127.0.1.1:35018:   3
+]
+11-12-2021 22:56:52:450 TSAE_Server@127.0.1.1:35024 [TRACE] : [TSAESessionPartnerSide] [session: 156] sent message: MessageAErequest [session: 156, summary=Server@127.0.1.1:35020:   1
+Server@127.0.1.1:35022:   2
+Server@127.0.1.1:35021:   0
+Server@127.0.1.1:35024:   3
+Server@127.0.1.1:35023:   0
+Server@127.0.1.1:35026:   -1000
+Server@127.0.1.1:35025:   1
+Server@127.0.1.1:35028:   2
+Server@127.0.1.1:35027:   1
+Server@127.0.1.1:35029:   1
+Server@127.0.1.1:35015:   0
+Server@127.0.1.1:35017:   1
+Server@127.0.1.1:35016:   2
+Server@127.0.1.1:35019:   2
+Server@127.0.1.1:35018:   3
+]
+11-12-2021 22:56:52:474 TSAE_Server@127.0.1.1:35024 [TRACE] : [TSAESessionPartnerSide] [session: 178] TSAE session
+11-12-2021 22:56:52:474 TSAE_Server@127.0.1.1:35024 [TRACE] : [TSAESessionPartnerSide] [session: 178] received message: MessageAErequest [session: 178, summary=Server@127.0.1.1:35020:   2
+Server@127.0.1.1:35022:   2
+Server@127.0.1.1:35021:   0
+Server@127.0.1.1:35024:   2
+Server@127.0.1.1:35023:   1
+Server@127.0.1.1:35026:   -1000
+Server@127.0.1.1:35015:   0
+Server@127.0.1.1:35025:   1
+Server@127.0.1.1:35028:   2
+Server@127.0.1.1:35017:   1
+Server@127.0.1.1:35027:   1
+Server@127.0.1.1:35016:   2
+Server@127.0.1.1:35019:   2
+Server@127.0.1.1:35029:   1
+Server@127.0.1.1:35018:   3
+]
+11-12-2021 22:56:52:474 TSAE_Server@127.0.1.1:35024 [TRACE] : [TSAESessionPartnerSide] [session: 178] sent message: MessageAErequest [session: 178, summary=Server@127.0.1.1:35020:   1
+Server@127.0.1.1:35022:   2
+Server@127.0.1.1:35021:   0
+Server@127.0.1.1:35024:   3
+Server@127.0.1.1:35023:   0
+Server@127.0.1.1:35026:   -1000
+Server@127.0.1.1:35025:   1
+Server@127.0.1.1:35028:   2
+Server@127.0.1.1:35027:   1
+Server@127.0.1.1:35029:   1
+Server@127.0.1.1:35015:   0
+Server@127.0.1.1:35017:   1
+Server@127.0.1.1:35016:   2
+Server@127.0.1.1:35019:   2
+Server@127.0.1.1:35018:   3
+]
+11-12-2021 22:56:52:475 TSAE_Server@127.0.1.1:35024 [TRACE] : [TSAESessionPartnerSide] [session: 178] received message: MessageOperation [session: -1, operation=AddOperation [recipe=[rgpoaqpx, Content--rgpoaqpx, Server@127.0.1.1:35020], timestamp=Server@127.0.1.1:35020:   2]]
+11-12-2021 22:56:52:475 TSAE_Server@127.0.1.1:35024 [TRACE] : [TSAESessionPartnerSide] [session: 178] received message: MessageOperation [session: -1, operation=AddOperation [recipe=[wwerqlfj, Content--wwerqlfj, Server@127.0.1.1:35023], timestamp=Server@127.0.1.1:35023:   1]]
+11-12-2021 22:56:52:475 TSAE_Server@127.0.1.1:35024 [TRACE] : [TSAESessionPartnerSide] [session: 178] received message: MessageEndTSAE [session: 178]
+11-12-2021 22:56:52:475 TSAE_Server@127.0.1.1:35024 [TRACE] : [TSAESessionPartnerSide] [session: 178] sent message: MessageEndTSAE [session: 178]
+11-12-2021 22:56:52:475 TSAE_Server@127.0.1.1:35024 [TRACE] : [TSAESessionPartnerSide] [session: 178] End TSAE session
+11-12-2021 22:56:52:484 TSAE_Server@127.0.1.1:35024 [TRACE] : [TSAESessionPartnerSide] [session: 172] TSAE session
+11-12-2021 22:56:52:484 TSAE_Server@127.0.1.1:35024 [TRACE] : [TSAESessionPartnerSide] [session: 172] received message: MessageAErequest [session: 172, summary=Server@127.0.1.1:35020:   2
+Server@127.0.1.1:35022:   2
+Server@127.0.1.1:35021:   0
+Server@127.0.1.1:35024:   2
+Server@127.0.1.1:35023:   1
+Server@127.0.1.1:35026:   -1000
+Server@127.0.1.1:35015:   0
+Server@127.0.1.1:35025:   1
+Server@127.0.1.1:35028:   2
+Server@127.0.1.1:35017:   1
+Server@127.0.1.1:35027:   1
+Server@127.0.1.1:35016:   2
+Server@127.0.1.1:35019:   2
+Server@127.0.1.1:35029:   1
+Server@127.0.1.1:35018:   3
+]
+11-12-2021 22:56:52:484 TSAE_Server@127.0.1.1:35024 [TRACE] : [TSAESessionPartnerSide] [session: 172] sent message: MessageAErequest [session: 172, summary=Server@127.0.1.1:35020:   2
+Server@127.0.1.1:35022:   2
+Server@127.0.1.1:35021:   0
+Server@127.0.1.1:35024:   3
+Server@127.0.1.1:35023:   1
+Server@127.0.1.1:35026:   -1000
+Server@127.0.1.1:35025:   1
+Server@127.0.1.1:35028:   2
+Server@127.0.1.1:35027:   1
+Server@127.0.1.1:35029:   1
+Server@127.0.1.1:35015:   0
+Server@127.0.1.1:35017:   1
+Server@127.0.1.1:35016:   2
+Server@127.0.1.1:35019:   2
+Server@127.0.1.1:35018:   3
+]
+11-12-2021 22:56:52:496 TSAE_Server@127.0.1.1:35024 [TRACE] : [TSAESessionPartnerSide] [session: 156] received message: MessageEndTSAE [session: 156]
+11-12-2021 22:56:52:496 TSAE_Server@127.0.1.1:35024 [TRACE] : [TSAESessionPartnerSide] [session: 156] sent message: MessageEndTSAE [session: 156]
+11-12-2021 22:56:52:496 TSAE_Server@127.0.1.1:35024 [TRACE] : [TSAESessionPartnerSide] [session: 156] End TSAE session
+11-12-2021 22:56:52:504 TSAE_Server@127.0.1.1:35024 [TRACE] : [TSAESessionOriginatorSide] [session: 169] TSAE session
+11-12-2021 22:56:52:504 TSAE_Server@127.0.1.1:35024 [TRACE] : [TSAESessionOriginatorSide] [session: 169] sent message: MessageAErequest [session: 169, summary=Server@127.0.1.1:35020:   2
+Server@127.0.1.1:35022:   2
+Server@127.0.1.1:35021:   0
+Server@127.0.1.1:35024:   3
+Server@127.0.1.1:35023:   1
+Server@127.0.1.1:35026:   -1000
+Server@127.0.1.1:35025:   1
+Server@127.0.1.1:35028:   2
+Server@127.0.1.1:35027:   1
+Server@127.0.1.1:35029:   1
+Server@127.0.1.1:35015:   0
+Server@127.0.1.1:35017:   1
+Server@127.0.1.1:35016:   2
+Server@127.0.1.1:35019:   2
+Server@127.0.1.1:35018:   3
+]
+11-12-2021 22:56:52:528 TSAE_Server@127.0.1.1:35024 [TRACE] : [TSAESessionPartnerSide] [session: 170] TSAE session
+11-12-2021 22:56:52:528 TSAE_Server@127.0.1.1:35024 [TRACE] : [TSAESessionPartnerSide] [session: 170] received message: MessageAErequest [session: 170, summary=Server@127.0.1.1:35020:   2
+Server@127.0.1.1:35022:   2
+Server@127.0.1.1:35021:   0
+Server@127.0.1.1:35024:   2
+Server@127.0.1.1:35023:   1
+Server@127.0.1.1:35026:   -1000
+Server@127.0.1.1:35015:   0
+Server@127.0.1.1:35025:   1
+Server@127.0.1.1:35028:   2
+Server@127.0.1.1:35017:   1
+Server@127.0.1.1:35027:   1
+Server@127.0.1.1:35016:   2
+Server@127.0.1.1:35019:   2
+Server@127.0.1.1:35029:   1
+Server@127.0.1.1:35018:   3
+]
+11-12-2021 22:56:52:528 TSAE_Server@127.0.1.1:35024 [TRACE] : [TSAESessionPartnerSide] [session: 172] received message: MessageEndTSAE [session: 172]
+11-12-2021 22:56:52:528 TSAE_Server@127.0.1.1:35024 [TRACE] : [TSAESessionPartnerSide] [session: 172] sent message: MessageEndTSAE [session: 172]
+11-12-2021 22:56:52:528 TSAE_Server@127.0.1.1:35024 [TRACE] : [TSAESessionPartnerSide] [session: 170] sent message: MessageAErequest [session: 170, summary=Server@127.0.1.1:35020:   2
+Server@127.0.1.1:35022:   2
+Server@127.0.1.1:35021:   0
+Server@127.0.1.1:35024:   3
+Server@127.0.1.1:35023:   1
+Server@127.0.1.1:35026:   -1000
+Server@127.0.1.1:35025:   1
+Server@127.0.1.1:35028:   2
+Server@127.0.1.1:35027:   1
+Server@127.0.1.1:35029:   1
+Server@127.0.1.1:35015:   0
+Server@127.0.1.1:35017:   1
+Server@127.0.1.1:35016:   2
+Server@127.0.1.1:35019:   2
+Server@127.0.1.1:35018:   3
+]
+11-12-2021 22:56:52:528 TSAE_Server@127.0.1.1:35024 [TRACE] : [TSAESessionPartnerSide] [session: 172] End TSAE session
+11-12-2021 22:56:52:548 TSAE_Server@127.0.1.1:35024 [TRACE] : [TSAESessionOriginatorSide] [session: 169] received message: MessageAErequest [session: 169, summary=Server@127.0.1.1:35020:   2
+Server@127.0.1.1:35022:   2
+Server@127.0.1.1:35021:   0
+Server@127.0.1.1:35024:   2
+Server@127.0.1.1:35023:   1
+Server@127.0.1.1:35026:   -1000
+Server@127.0.1.1:35015:   0
+Server@127.0.1.1:35025:   1
+Server@127.0.1.1:35028:   2
+Server@127.0.1.1:35017:   1
+Server@127.0.1.1:35027:   1
+Server@127.0.1.1:35016:   2
+Server@127.0.1.1:35019:   2
+Server@127.0.1.1:35029:   1

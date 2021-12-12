@@ -116,7 +116,21 @@ public class TimestampVector implements Serializable{
 	 * After merging, local node will have the smallest timestamp for each node.
 	 *  @param tsVector (timestamp vector)
 	 */
-	public void mergeMin(TimestampVector tsVector){
+	public synchronized void mergeMin(TimestampVector tsVector){
+		 if (tsVector != null) {
+			 for (Map.Entry<String, Timestamp> entry : tsVector.timestampVector.entrySet()) {
+		            String node = entry.getKey();
+		            Timestamp entryTimestamp = entry.getValue();
+		            Timestamp localTimestamp = this.getLast(node);
+		            
+		            if (localTimestamp == null) {
+		                this.timestampVector.put(node, entryTimestamp);
+		            } else if (entryTimestamp.compare(localTimestamp) < 0) {
+		                this.timestampVector.replace(node, entryTimestamp);
+		            }
+		        }
+		 }
+		
 	}
 	
 	/**
