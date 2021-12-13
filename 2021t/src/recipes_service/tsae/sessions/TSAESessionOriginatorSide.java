@@ -40,6 +40,7 @@ import recipes_service.communication.MsgType;
 import recipes_service.data.AddOperation;
 import recipes_service.data.Operation;
 import recipes_service.data.OperationType;
+import recipes_service.data.RemoveOperation;
 import recipes_service.tsae.data_structures.TimestampMatrix;
 import recipes_service.tsae.data_structures.TimestampVector;
 import communication.ObjectInputStream_DS;
@@ -139,7 +140,9 @@ public class TSAESessionOriginatorSide extends TimerTask{
 				
 				//Obtenemos las nuevas operaciones y las añadimos
 				 for (Operation op : serverData.getLog().listNewer(aerequestMsg.getSummary())) {
-	                    out.writeObject(new MessageOperation(op));
+					 	msg = new MessageOperation(op);
+					 	msg.setSessionNumber(current_session_number);
+	                    out.writeObject(msg);
 	                }
 				
 				 /*
@@ -163,9 +166,18 @@ public class TSAESessionOriginatorSide extends TimerTask{
 					// Nuevo -> Inicio de operación sincronizada
 					synchronized (serverData) {
                         for (MessageOperation operation : operations) {
+                        	switch(operation.getOperation().getType()) {
+	                        	case ADD:
+	                        		serverData.syncOperation((AddOperation) operation.getOperation());
+	                        		break;
+	                        	case REMOVE:
+	                        		serverData.syncOperation((RemoveOperation) operation.getOperation());
+	                        		break;
+                        	}
+                        	/*
                             if (operation.getOperation().getType() == OperationType.ADD) {
                                 serverData.syncOperation((AddOperation) operation.getOperation());
-                            } 
+                            } */
                         }
 
                         serverData.getSummary().updateMax(aerequestMsg.getSummary());

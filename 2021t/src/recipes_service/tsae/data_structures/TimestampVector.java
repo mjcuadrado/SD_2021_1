@@ -74,7 +74,9 @@ public class TimestampVector implements Serializable{
 		LSimLogger.log(Level.TRACE, "Updating the TimestampVectorInserting with the timestamp: "+timestamp);
 
 		//Añadimos el timestamp a timestampVector
-		timestampVector.put(timestamp.getHostid(),timestamp);
+		if (timestamp != null) {
+			timestampVector.put(timestamp.getHostid(),timestamp);
+		}
 	}
 	
 	/**
@@ -143,12 +145,13 @@ public class TimestampVector implements Serializable{
 	/**
 	 * equals
 	 */
+	 @Override
 	public boolean equals(Object obj) {
 		/* 
 		 * Resultado de la comparación 
 		 * Solo nos interesa si el objeto es el mismo
 		 * */
-		
+		/*
 		boolean result= false; //Por defecto devolvemos false
 		
 		if (obj != null && obj == this) {
@@ -159,7 +162,34 @@ public class TimestampVector implements Serializable{
 		}
 		
 		return result;
+		*/
+		 if (obj == null) {
+	            return false;
+	        } else if (this == obj) {
+	            return true;
+	        } else if (!(obj instanceof TimestampVector)) {
+	            return false;
+	        }
+
+		 TimestampVector tsVector = (TimestampVector) obj;
+		 if (this.timestampVector == tsVector.timestampVector) {
+	            return true;
+	        } else if (this.timestampVector == null || tsVector.timestampVector == null) {
+	            return false;
+	        } else {
+	            return this.timestampVector.equals(tsVector.timestampVector);
+	        }
 	}
+	 
+	 public boolean equals(TimestampVector tsVector) {
+		 if (this.timestampVector == tsVector.timestampVector) {
+	            return true;
+	        } else if (this.timestampVector == null || tsVector.timestampVector == null) {
+	            return false;
+	        } else {
+	            return this.timestampVector.equals(tsVector.timestampVector);
+	        }
+	    }
 
 	/**
 	 * toString

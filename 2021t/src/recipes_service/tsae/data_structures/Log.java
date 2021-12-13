@@ -141,20 +141,16 @@ public class Log implements Serializable{
 	            String host = logValue.getKey();
 	            List<Operation> ops = logValue.getValue();
 	            Timestamp lastTs = minTimestampVector.getLast(host);
-	         
-	            if (lastTs != null) {
-
-		            //Analizamos las operaciones
-		            for (int i = ops.size() - 1; i >= 0; i--) {
-		                Operation op = ops.get(i);
-
-		                if (op.getTimestamp().compare(lastTs) < 0) {
-		                	//Borramos
-		                    ops.remove(i);
-		                }
-		            }
-	            }
-
+	    
+	            if (lastTs != null){
+					for (int i = 0; i < ops.size(); i++) {
+						Operation op = ops.get(i);
+						if (!(op.getTimestamp().compare(lastTs) > 0)){
+							ops.remove(i);
+						}
+						
+					}
+				}	
 	        }
 	}
 
@@ -170,16 +166,56 @@ public class Log implements Serializable{
 		
 		//Por defecto devolvemos false
 		boolean result= false;
-		
+		/*
 		if (obj != null && obj == this) {
 			result = true;
 		}else if (obj != null) {
 			Log parameterLog = (Log) obj;
 			result = log.equals(parameterLog.log);
-		}
+		}*/
+		
+		 if (obj == null) {
+			 result =  false;
+	        } else if (this == obj) {
+	        	result =  true;
+	        } else if (!(obj instanceof Log)) {
+	        	result =  false;
+	        }
+
+		
+		Log l = (Log) obj;
+
+        if (this.log == l.log) {
+            result= true;
+        } else if (this.log == null || l.log == null) {
+            result = false;
+        } else {
+            result = this.log.equals(l.log);
+        }
 		
 		return result;
 	}
+	
+	public boolean equals(Log l) {
+		/* 
+		 * Resultado de la comparación 
+		 * Solo nos interesa si el objeto es el mismo
+		 * */
+		
+		//Por defecto devolvemos false
+		boolean result= false;
+
+        if (this.log == l.log) {
+            result= true;
+        } else if (this.log == null || l.log == null) {
+            result = false;
+        } else {
+            result = this.log.equals(l.log);
+        }
+		
+		return result;
+	}
+
 
 	/**
 	 * toString
