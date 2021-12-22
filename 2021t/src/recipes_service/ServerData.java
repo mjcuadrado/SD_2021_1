@@ -153,7 +153,19 @@ public class ServerData {
 	}
 	
 	public synchronized void removeRecipe(String recipeTitle){
-		System.err.println("Error: removeRecipe method (recipesService.serverData) not yet implemented");
+		if(recipes.contains(recipeTitle))
+		{
+			Timestamp timestamp = nextTimestamp();
+	        Recipe rcpe = this.recipes.get(recipeTitle);
+	        Operation op = new RemoveOperation(recipeTitle, rcpe.getTimestamp(), timestamp);
+
+	        this.log.add(op);
+	        this.summary.updateTimestamp(timestamp);
+	        this.recipes.remove(recipeTitle);
+	        LSimLogger.log(Level.TRACE, "remove: borrado");
+		}
+
+
 	}
 	
 	private synchronized void purgeTombstones(){
@@ -256,8 +268,26 @@ public class ServerData {
 	//Nuevo sincronizador de operaciones (añadir)
 	public void syncOperation(AddOperation operation) {
 	     if (this.log.add(operation)) {
-	            this.recipes.add(operation.getRecipe());
+	    	 if(!tombstones.contains(operation.getRecipe().getTimestamp()))
+				{
+	    		 this.recipes.add(operation.getRecipe());
+				}
+	            
 	        }
 		
 	}
+	
+	//Nuevo sincronizador de operaciones (borrar)
+	   public synchronized void syncOperation(RemoveOperation rmOp) {
+	        if (this.log.add(rmOp)) {
+	        	if (recipes.contains(rmOp.getRecipeTitle())) {
+	        		this.recipes.remove(rmOp.getRecipeTitle());;
+	        		LSimLogger.log(Level.TRACE, "Sync: Existe");
+	        	}else {
+	        		tombstones.add(rmOp.getRecipeTimestamp());
+	        		LSimLogger.log(Level.TRACE, "Sync: No existe");
+	        	}
+	            
+	        }
+	    }
 }

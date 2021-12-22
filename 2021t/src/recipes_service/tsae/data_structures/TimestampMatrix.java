@@ -77,10 +77,7 @@ public class TimestampMatrix implements Serializable{
 	            String key = parameterEntry.getKey();
 	            TimestampVector parameterValue = parameterEntry.getValue();
 
-	            TimestampVector localValue = this.timestampMatrix.get(key);
-	            if (localValue != null) {
-	                localValue.updateMax(parameterValue);
-	            }
+	            	this.timestampMatrix.get(key).updateMax(parameterValue);
 	        }
 	}
 	
@@ -102,7 +99,7 @@ public class TimestampMatrix implements Serializable{
 	 * the timestamp known by all participants
 	 */
 	public synchronized TimestampVector minTimestampVector(){
-
+		/*
 		TimestampVector result = null;
 		
 		Set<String> hosts = timestampMatrix.keySet();
@@ -115,6 +112,18 @@ public class TimestampMatrix implements Serializable{
 				result = tsVector.clone();
 			}
 		}
+		return result;*/
+		TimestampVector result;
+		
+		Enumeration <TimestampVector> en = timestampMatrix.elements();
+		result = en.nextElement().clone();
+				
+		while(en.hasMoreElements())
+		{
+			TimestampVector timeVector=en.nextElement().clone();
+			result.mergeMin(timeVector);
+		}
+		
 		return result;
 	}
 	

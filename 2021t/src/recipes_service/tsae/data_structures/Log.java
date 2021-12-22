@@ -77,6 +77,7 @@ public class Log implements Serializable{
 	 * @return true if op is inserted, false otherwise.
 	 */
 	public synchronized boolean add(Operation op){
+		/*
 	
 		 String hostId = op.getTimestamp().getHostid();
 		 //Ultimo timestamp por host
@@ -92,7 +93,17 @@ public class Log implements Serializable{
             return true;
         } else {
             return false;
-        }
+        }*/
+		
+		String host = op.getTimestamp().getHostid();
+		List<Operation> ops = log.get(host);
+		
+		if(ops.isEmpty() || ops.get(ops.size()-1).getTimestamp().compare(op.getTimestamp())<0)
+		{	
+				return ops.add(op);		
+		}
+		
+		return false;
 	}
 	
 	/**
@@ -104,6 +115,7 @@ public class Log implements Serializable{
 	 * @return list of operations
 	 */
 	public synchronized List<Operation> listNewer(TimestampVector sum){
+		/*
 
 		 List<Operation> missingOperations = new ArrayList();
 
@@ -124,7 +136,34 @@ public class Log implements Serializable{
 	        }
 	        
 	        //Devolvemos las operaciones que no tenemos
-	        return missingOperations;
+	        return missingOperations;*/
+		
+		List<Operation> result = new Vector<Operation>();
+		
+		for(ConcurrentHashMap.Entry<String,List<Operation>> entry:log.entrySet() )
+		{
+			String host = entry.getKey();
+			List<Operation> ops = entry.getValue(); 
+			if (!ops.isEmpty())
+			{
+				Timestamp last = ops.get(ops.size()-1).getTimestamp();
+				if(last.compare(sum.getLast(host))>0)
+				{
+					if(sum.getLast(host).isNullTimestamp())
+					{
+						result.addAll(ops);
+					}else
+					{		
+						for(Operation op : ops)
+						{
+							if (op.getTimestamp().compare(sum.getLast(host))>0)
+								result.add(op);
+						}
+					}
+				}
+			}	
+		}
+		return result;
 	}
 	
 	/**
@@ -142,14 +181,23 @@ public class Log implements Serializable{
 	            List<Operation> ops = logValue.getValue();
 	            Timestamp lastTs = minTimestampVector.getLast(host);
 	    
-	            if (lastTs != null){
+	            if (lastTs != null){/*
 					for (int i = 0; i < ops.size(); i++) {
 						Operation op = ops.get(i);
 						if (!(op.getTimestamp().compare(lastTs) > 0)){
 							ops.remove(i);
 						}
 						
-					}
+					}*/
+	            	Iterator<Operation> it = ops.iterator();
+	            	if(!lastTs.isNullTimestamp()) {
+	    				while(it.hasNext())
+	    				{
+	    					Operation op = it.next();
+	    					if (lastTs.compare(op.getTimestamp())>=0 ) it.remove();
+	    				}
+	    			}
+	            	
 				}	
 	        }
 	}
